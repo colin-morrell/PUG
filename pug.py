@@ -97,7 +97,7 @@ def generatePassword(username, randomWords):
     theChosen = random.choice(population)
 
     # Check whether our chosen function accepts an argument. If any of the password generation methods ever
-    # required more than one argument this would break horribly. Maybe this should be a class
+    # required more than one argument this would break horribly.
     if theChosen[1] is None:
         password = theChosen[0]()
     else:
@@ -121,119 +121,23 @@ def generateHashLM(username, randomWords):
     print username+':'+str(random.randint(1000,2000))+':'+'%s:%s:::' % smbpasswd.hash(password)
 
 
-def generatePlaintext(username, randomNumber, randomWords):
-	if randomNumber <=3: # 3%
-		password = pass_Username(username)
-		print "[+] %s\t%s " % (username, password)
-	elif randomNumber <=6: # 3%
-		password = pass_Password()
-		print "[+] %s\t%s " % (username, password)
-	elif randomNumber <=12: # 6%
-		password = pass_DictWord_DigitsFirst(randomWords)
-		print "[+] %s\t%s " % (username, password)
-	elif randomNumber <=64: # 52%
-		password = pass_DictWord(randomWords)
-		print "[+] %s\t%s " % (username, password)
-	elif randomNumber <=74: # 10%
-		password = random_Password_ULD()
-		print "[+] %s\t%s " % (username, password)
-	elif randomNumber <=80: # 6%
-		password = random_ShittyWord()
-		print "[+] %s\t%s " % (username, password)
-	elif randomNumber <=87: # 7%
-		password = random_Password_LD()
-		print "[+] %s\t%s " % (username, password)
-	elif randomNumber <=88: # 1%
-		password = ""
-		print "[+] %s\t%s " % (username, password)
-	elif randomNumber <=89: # 1%
-		password = "hunter2"
-		print "[+] %s\t%s " % (username, password)
-	elif randomNumber <=98: # 9%
-		password = pass_DictWord_Upper(randomWords)
-		try: 
-			print "[+] %s\t%s " % (username, password)
-		except AttributeError: # This is in case the word starts with something other than a letter
-			print "[+] %s\t%s " % (username, password)
-	elif randomNumber <=100: # 2%
-		password = random_Password_ULDS()
-		print "[+] %s\t%s " % (username, password)
+def generatePlaintext(username, randomWords):
+    
+    password = generatePassword(username, randomWords)
+    print "[+] %s\t%s " % (username, password)
 
-def generateCmd(username, randomNumber, randomWords):
-	if randomNumber <=3: # 3%
-		password = pass_Username(username)
-		print "net user %s %s /add" % (username, password)
-	elif randomNumber <=6: # 3%
-		password = pass_Password()
-		print "net user %s %s /add" % (username, password)
-	elif randomNumber <=12: # 6%
-		password = pass_DictWord_DigitsFirst(randomWords)
-		print "net user %s %s /add" % (username, password)
-	elif randomNumber <=64: # 52%
-		password = pass_DictWord(randomWords)
-		print "net user %s %s /add" % (username, password)
-	elif randomNumber <=74: # 10%
-		password = random_Password_ULD()
-		print "net user %s %s /add" % (username, password)
-	elif randomNumber <=80: # 6%
-		password = random_ShittyWord()
-		print "net user %s %s /add" % (username, password)
-	elif randomNumber <=87: # 7%
-		password = random_Password_LD()
-		print "net user %s %s /add" % (username, password)
-	elif randomNumber <=88: # 1%
-		password = ""
-		print "net user %s %s /add" % (username, password)
-	elif randomNumber <=89: # 1%
-		password = "hunter2"
-		print "net user %s %s /add" % (username, password)
-	elif randomNumber <=98: # 9%
-		password = pass_DictWord_Upper(randomWords)
-		try: 
-			print "net user %s %s /add" % (username, password)
-		except AttributeError: # This is in case the word starts with something other than a letter
-			print "net user %s %s /add" % (username, password)
-	elif randomNumber <=100: # 2%
-		password = random_Password_ULDS()
-		print "net user %s %s /add" % (username, password)
 
-def generateCmdDomain(username, randomNumber, randomWords):
-	if randomNumber <=3: # 3%
-		password = pass_Username(username)
-		print "net user %s %s /add /domain" % (username, password)
-	elif randomNumber <=6: # 3%
-		password = pass_Password()
-		print "net user %s %s /add /domain" % (username, password)
-	elif randomNumber <=12: # 6%
-		password = pass_DictWord_DigitsFirst(randomWords)
-		print "net user %s %s /add /domain" % (username, password)
-	elif randomNumber <=64: # 52%
-		password = pass_DictWord(randomWords)
-		print "net user %s %s /add /domain" % (username, password)
-	elif randomNumber <=74: # 10%
-		password = random_Password_ULD()
-		print "net user %s %s /add /domain" % (username, password)
-	elif randomNumber <=80: # 6%
-		password = random_ShittyWord()
-		print "net user %s %s /add /domain" % (username, password)
-	elif randomNumber <=87: # 7%
-		password = random_Password_LD()
-		print "net user %s %s /add /domain" % (username, password)
-	elif randomNumber <=88: # 1%
-		password = ""
-		print "net user %s %s /add /domain" % (username, password)
-	elif randomNumber <=89: # 1%
-		password = "hunter2"
-		print "net user %s %s /add /domain" % (username, password)
-	elif randomNumber <=98: # 9%
-		password = pass_DictWord_Upper(randomWords)
-		try: 
-			print "net user %s %s /add /domain" % (username, password)
-		except AttributeError: # This is in case the word starts with something other than a letter
-			print "net user %s %s /add /domain" % (username, password)
-	elif randomNumber <=100: # 2%
-		password = random_Password_ULDS()
-		print "net user %s %s /add /domain" % (username, password)
+def generateCmd(username, randomWords):
+    
+    password = generatePassword(username, randomWords)
+    print "net user %s %s /add" % (username, password)
+
+
+def generateCmdDomain(username, randomWords):
+
+    password = generatePassword(username, randomWords)
+    print "net user %s %s /add /domain" % (username, password)
+
 
 def generateUser(lastNames, firstNames):
 	firstName = random.choice(firstNames)
@@ -278,7 +182,6 @@ def main():
 	if args.hashes:
 		for i in range(0, args.count):
 			name = generateUser(random.choice(lastNames), random.choice(firstNames))
-			#randomNumber = random.randint(0,100)
 			if args.ntlm:
 				generateHashNTLM(name, randomWords)
 			if args.lm:
@@ -286,18 +189,15 @@ def main():
 	elif args.cmd:
 		for i in range(0, args.count):
 			name = generateUser(random.choice(lastNames), random.choice(firstNames))
-			randomNumber = random.randint(0,100)
-			generateCmd(name, randomNumber, randomWords)
+			generateCmd(name, randomWords)
 	elif args.cmdDomain:
 		for i in range(0, args.count):
 			name = generateUser(random.choice(lastNames), random.choice(firstNames))
-			randomNumber = random.randint(0,100)
-			generateCmdDomain(name, randomNumber, randomWords)		
+			generateCmdDomain(name, randomWords)
 	else:
 		for i in range(0, args.count):
 			name = generateUser(random.choice(lastNames), random.choice(firstNames))
-			randomNumber = random.randint(0,100)
-			generatePlaintext(name, randomNumber, randomWords)
+			generatePlaintext(name, randomWords)
 
 if __name__ == "__main__":
 	main()
